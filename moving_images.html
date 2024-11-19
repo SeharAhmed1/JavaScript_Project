@@ -2,14 +2,14 @@
 <html>
 <style>
 #container {
-width: 350px ;
-height: 350px;
+width: 600px ;
+height: 600px;
 background: black;
 position: relative;
 }
 #animate1, #animate2 {
-height: 50px;
-width : 50px ;
+height: 100px;
+width : 100px ;
 position: absolute;
 }
 #animate1 {
@@ -24,26 +24,35 @@ background : blue;
 </style>
 <body>
 
-<h2 id = "heading" style = "font-size : 40px" >Sehar's PlayArea</h2><br>
+<h2 id = "heading" style = "font-size : 40px" >Sehar's PlayArea</h2>
+<p style ="font-size: 17px" >"Enter your name to replace 'My' Play Area with 'Your' Play Area"</p>
+<input id = "input" type = "text"> 
+<button id = "submit" onclick = "func1()">Submit</button><br><br>
+
 <p style ="font-size: 17px" >"Tap Click Here to Move the boxes"</p>
 <button type="button" onclick="myFunction()">Click Here </button>
-<button type="button" onclick="alert('Warning: Click the other button')">Click for Alert popup</button><br><br><br>
+<button type="button" onclick="alert('Warning: Click the other button')">Click for Alert</button><br><br>
+
+<p style ="font-size: 17px" >"Select a color to change the background of the container"</p>
+<input type="color" id="colorPicker" onchange="changeBackgroundColor()">
+<button onclick="changeBackgroundColor()">Change Background Color</button><br><br><br>
 
 <div id = "container">
 	<div id = "animate1"></div>
 	<div id = "animate2"></div>
 </div>
 <script>
+// Set the placeholder when the page loads
+document.getElementById('input').setAttribute('placeholder', 'Enter Name');
 
 function func1(){
 let x = document.getElementById("input").value;
+x= x.charAt(0).toUpperCase() + x.slice(1);
 document.getElementById("heading").innerHTML = x + "'s Play Area" ;
-document.getElementById("input").style.display = "none";
-document.getElementById("submit").style.display = "none";
+document.getElementById("input").value="";
 }
 
 let id = null;
-let pos = 0 ;
 function myFunction(){
 	clearInterval(id);
 	moving_img("animate1");
@@ -55,37 +64,41 @@ function moving_img(value){
     let elem = document.getElementById(value);
 	function frame(){
     	pos++ ;
-        if (pos >= 1500){
+        if (pos >= 2500){
         clearInterval(id);
-        } else if (pos >=1200 && pos < 1500){
+        } else if (pos >=2000 && pos < 2500){
         	if(value == "animate1"){
-            elem.style.left = (pos - 1200) + "px" ;
-            elem.style.top = (pos - 1200) + "px" ;
+            elem.style.left = (pos - 2000) + "px" ;
+            elem.style.top = (pos - 2000) + "px" ;
             }
             if(value == "animate2"){
-            elem.style.left = 300 - (pos - 1200) + "px" ;
-            elem.style.top = (pos - 1200) + "px" ;
+            elem.style.left = 500 - (pos - 2000) + "px" ;
+            elem.style.top = (pos - 2000) + "px" ;
             }
-        }else if (pos >=900 && pos < 1200){
+        }else if (pos >=1500 && pos < 2000){
         	if(value == "animate1"){
-            elem.style.left = 300 - (pos - 900) + "px" ;
+            elem.style.left = 500 - (pos - 1500) + "px" ;
             }
             if(value == "animate2"){
-            elem.style.left = (pos - 900) + "px" ;
+            elem.style.left = (pos - 1500) + "px" ;
             } 
-        } else if(pos >= 600 && pos < 900){
-            elem.style.top = 300 - (pos - 600) + "px" ;
-     	} else if(pos >= 300 && pos < 600){
+        } else if(pos >= 1000 && pos < 1500){
+            elem.style.top = 500 - (pos - 1000) + "px" ;
+     	} else if(pos >= 500 && pos < 1000){
         	if(value == "animate1"){
-            elem.style.left = (pos - 300) + "px" ;
+            elem.style.left = (pos - 500) + "px" ;
             }
             if(value == "animate2"){
-            elem.style.left = 300 - (pos - 300) + "px" ;
+            elem.style.left = 500 - (pos - 500) + "px" ;
             }
         } else {
         	elem.style.top = pos + "px";
         }
   }
+}
+function changeBackgroundColor() {
+    let selectedColor = document.getElementById("colorPicker").value;
+    document.getElementById("container").style.backgroundColor = selectedColor;
 }
 </script>
 </body>
