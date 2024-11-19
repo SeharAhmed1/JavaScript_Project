@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<style>
+#container {
+width: 350px ;
+height: 350px;
+background: black;
+position: relative;
+}
+
+#animate1, #animate2 {
+height: 50px;
+width : 50px ;
+position: absolute;
+}
+
+#animate1 {
+top:0 ;
+left: 0;
+background : red ;
+}
+
+#animate2 {
+right:0;
+background : blue;
+
+}
+</style>
+<body>
+
+<h2 id = "heading" style = "font-size : 40px" >Sehar's PlayArea</h2><br>
+
+<p style ="font-size: 17px" >"Tap Click Here to Move the boxes"</p>
+
+<button type="button" onclick="myFunction()">Click Here </button>
+
+<div id = "container">
+	<div id = "animate1"></div>
+	<div id = "animate2"></div>
+</div>
+<script>
+
+function func1(){
+let x = document.getElementById("input").value;
+document.getElementById("heading").innerHTML = x + "'s Play Area" ;
+document.getElementById("input").style.display = "none";
+document.getElementById("submit").style.display = "none";
+}
+
+let id = null;
+let pos = 0 ;
+function myFunction(){
+	clearInterval(id);
+	moving_img("animate1");
+    moving_img("animate2");
+
+}
+function moving_img(value){
+	pos = 0 ;
+	id = setInterval(frame, 5);
+    let elem = document.getElementById(value);
+	function frame(){
+    	pos++ ;
+        if (pos >= 1500){
+        clearInterval(id);
+        } else if (pos >=1200 && pos < 1500){
+        	if(value == "animate1"){
+            elem.style.left = (pos - 1200) + "px" ;
+            elem.style.top = (pos - 1200) + "px" ;
+            }
+            if(value == "animate2"){
+            elem.style.left = 300 - (pos - 1200) + "px" ;
+            elem.style.top = (pos - 1200) + "px" ;
+            }
+        
+        
+        }else if (pos >=900 && pos < 1200){
+        	if(value == "animate1"){
+            elem.style.left = 300 - (pos - 900) + "px" ;
+            }
+            if(value == "animate2"){
+            elem.style.left = (pos - 900) + "px" ;
+            }
+            
+        } else if(pos >= 600 && pos < 900){
+        	
+            elem.style.top = 300 - (pos - 600) + "px" ;
+            
+     	} else if(pos >= 300 && pos < 600){
+        	if(value == "animate1"){
+            elem.style.left = (pos - 300) + "px" ;
+            }
+            if(value == "animate2"){
+            elem.style.left = 300 - (pos - 300) + "px" ;
+            }
+        } else {
+        	elem.style.top = pos + "px";
+        }
+  }
+}
+
+</script>
+</body>
+</html>
